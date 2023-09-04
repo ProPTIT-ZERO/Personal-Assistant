@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Personal Assistant</string>
+    <string name="start">Let\'s start</string>
+    <string name="today">Today</string>
+    <string name="all_task">All task</string>
+    <string name="all_note">All note</string>
+    <string name="assistant">Assistant</string>
+    <string name="critical">Critical</string>
+    <string name="important">Important</string>
+    <string name="low_priority">Low priority</string>
+    <string name="profile">Profile</string>
+</resources>
