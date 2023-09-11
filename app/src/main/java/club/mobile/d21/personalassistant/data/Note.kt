@@ -14,19 +14,18 @@ import java.time.Instant
 data class Note(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "content") val content: String?,
-    @ColumnInfo(name = "date") val date: Instant?
+    @ColumnInfo(name = "date") val date: Instant
 )
-
 @Dao
 interface NoteDAO{
     @Query("SELECT * FROM note")
     fun getAll(): List<Note>
 
     @Query("SELECT * FROM note WHERE id = :hqaId")
-    fun getNoteById(hqaId: Int)
+    fun getNoteById(hqaId: Int): Note
 
     @Query("SELECT * FROM note WHERE date(date) = date('now')")
-    fun getAllNoteToday(hqaDate: Instant): List<Note>
+    fun getAllNoteToday(): List<Note>
 
     @Query("SELECT * FROM note WHERE content = :hqaContent")
     fun findNote(hqaContent: String): Note
@@ -41,4 +40,7 @@ interface NoteDAO{
 
     @Delete
     fun deleteNote(oldNote: Note)
+
+    @Query("DELETE FROM note")
+    fun clearAllNote()
 }

@@ -5,32 +5,38 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.room.Room.databaseBuilder
+import androidx.room.Room
 import club.mobile.d21.personalassistant.data.AppDatabase
+import club.mobile.d21.personalassistant.data.InstantConverter
 import club.mobile.d21.personalassistant.data.Note
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.time.Instant
 
 class AllNoteViewModel (application: Application) : AndroidViewModel(application) {
-    private val data = databaseBuilder(
+    private val instantConverter = InstantConverter()
+    private val data = Room.databaseBuilder(
         application.applicationContext,
         AppDatabase::class.java, "database-note"
-    ).build()
+    )
+        .addTypeConverter(instantConverter)
+        .build()
     private val noteDao = data.noteDAO()
-    private val defaultNote =
-        Note(1, "Sinh nhật Quốc Anh", Instant.parse("2023-10-20T00:00:00Z"))
+    private var xyz = "Hello"
     init {
-        viewModelScope.launch {
-            initDatabase()
-        }
-    }
-    private fun initDatabase() {
-        if (noteDao.getNoteById(1) == null) {
+        viewModelScope.launch(Dispatchers.IO){
+            xyz = "Goodbye"
+            noteDao.clearAllNote()
+            val defaultNote =
+                Note(1, "Sinh nhật Quốc Anh",
+                    instantConverter.fromStringToInstant("2023-10-20T00:00:00Z"))
             noteDao.addNote(defaultNote)
+            //Dòng add note có chạy vì nếu bỏ add note đi thì lỗi xyz gán null luôn
+            xyz = defaultNote.content.toString()
         }
+
     }
-    private var _text = MutableLiveData<String>().apply {
-        value = noteDao.getNoteById(1).toString()
+    private val _text = MutableLiveData<String>().apply {
+        value = xyz
     }
     val text: LiveData<String> = _text
 }

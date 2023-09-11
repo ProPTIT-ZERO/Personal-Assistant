@@ -30,7 +30,7 @@ interface TaskDAO{
     fun getAll(): List<Task>
 
     @Query("SELECT * FROM note WHERE id = :hqaId")
-    fun getTaskById(hqaId: Int)
+    fun getTaskById(hqaId: Int): Task
 
     @Query("SELECT * FROM task WHERE priority = 'CRITICAL'")
     fun getCriticalTasks(): List<Task>

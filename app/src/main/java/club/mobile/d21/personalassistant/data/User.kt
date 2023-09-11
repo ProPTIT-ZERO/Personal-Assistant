@@ -27,16 +27,16 @@ interface UserDAO{
     fun getAll(): List<User>
 
     @Query("SELECT * FROM user WHERE id = :hqaId")
-    fun getUserById(hqaId: Int)
+    fun getUserById(hqaId: Int): User
 
     @Query("SELECT * FROM user WHERE name = :hqaName")
-    fun getUserByName(hqaName: String)
+    fun getUserByName(hqaName: String): User
 
     @Query("SELECT * FROM user WHERE phone = :hqaPhone")
-    fun getUserByPhone(hqaPhone: String)
+    fun getUserByPhone(hqaPhone: String):User
 
     @Query("SELECT * FROM user WHERE email = :hqaEmail")
-    fun getUserByEmail(hqaEmail: String)
+    fun getUserByEmail(hqaEmail: String):User
 
     @Insert
     fun addUser(newUser: User)
