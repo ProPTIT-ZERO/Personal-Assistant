@@ -1,5 +1,6 @@
 package club.mobile.d21.personalassistant.data
 
+import androidx.lifecycle.LiveData
 import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Delete
@@ -29,6 +30,9 @@ interface NoteDAO{
 
     @Query("SELECT * FROM note WHERE content = :hqaContent")
     fun findNote(hqaContent: String): Note
+
+    @Query("SELECT COUNT(*) FROM note")
+    fun getRowCount(): Int
 
     @Insert
     fun addNote(newNote: Note)

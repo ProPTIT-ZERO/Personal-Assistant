@@ -9,4 +9,14 @@
     <string name="important">Important</string>
     <string name="low_priority">Low priority</string>
     <string name="profile">Profile</string>
+    <string name="day">Day</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+    <string name="save">SAVE</string>
+    <string name="add">ADD</string>
+    <string name="note">Note</string>
+    <string name="please_enter_the_date">Please enter the date</string>
+    <string name="please_enter_the_month">Please enter the month</string>
+    <string name="please_enter_the_year">Please enter the year</string>
+    <string name="please_enter_your_note">Please enter your note</string>
 </resources>

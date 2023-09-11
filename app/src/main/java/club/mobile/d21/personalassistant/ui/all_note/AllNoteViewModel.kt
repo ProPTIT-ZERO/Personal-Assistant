@@ -21,22 +21,26 @@ class AllNoteViewModel (application: Application) : AndroidViewModel(application
         .addTypeConverter(instantConverter)
         .build()
     private val noteDao = data.noteDAO()
-    private var xyz = "Hello"
+    private val _text = MutableLiveData<String>()
     init {
         viewModelScope.launch(Dispatchers.IO){
-            xyz = "Goodbye"
             noteDao.clearAllNote()
             val defaultNote =
                 Note(1, "Sinh nhật Quốc Anh",
                     instantConverter.fromStringToInstant("2023-10-20T00:00:00Z"))
-            noteDao.addNote(defaultNote)
-            //Dòng add note có chạy vì nếu bỏ add note đi thì lỗi xyz gán null luôn
-            xyz = defaultNote.content.toString()
+            if(noteDao.getNoteById(1) == null) {
+                noteDao.addNote(defaultNote)
+            }
+            _text.postValue(noteDao.getNoteById(1).content.toString())
         }
-
     }
-    private val _text = MutableLiveData<String>().apply {
-        value = xyz
+    internal fun addNote(date:String, note:String){
+        viewModelScope.launch(Dispatchers.IO) {
+            noteDao.addNote(
+                Note(noteDao.getRowCount()+1, note, instantConverter.fromStringToInstant(date))
+            )
+            _text.postValue(noteDao.getNoteById(noteDao.getRowCount()).content.toString())
+        }
     }
     val text: LiveData<String> = _text
 }
