@@ -18,11 +18,12 @@ enum class Priority{
 @Entity(tableName = "task")
 data class Task(
     @PrimaryKey val id: Int,
-    @ColumnInfo(name = "task_name") val taskName: String?,
+    @ColumnInfo(name = "task") val task: String?,
     @ColumnInfo(name = "priority") val priority: Priority?,
-    @ColumnInfo(name = "start_time") val startTime: Instant?,
-    @ColumnInfo(name = "deadline") val deadline: Instant?,
-)
+    @ColumnInfo(name = "deadline_day") val deadlineDay: String?,
+    @ColumnInfo(name = "deadline_time") val deadlineTime: String?,
+    @ColumnInfo(name = "detail") val detail:String
+ )
 
 @Dao
 interface TaskDAO{

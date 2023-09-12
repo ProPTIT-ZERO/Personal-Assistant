@@ -1,6 +1,5 @@
 package club.mobile.d21.personalassistant.data
 
-import androidx.lifecycle.LiveData
 import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Delete
@@ -9,13 +8,12 @@ import androidx.room.Insert
 import androidx.room.PrimaryKey
 import androidx.room.Query
 import androidx.room.Update
-import java.time.Instant
 
 @Entity(tableName = "note")
 data class Note(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "content") val content: String?,
-    @ColumnInfo(name = "date") val date: Instant
+    @ColumnInfo(name = "date") val date: String
 )
 @Dao
 interface NoteDAO{

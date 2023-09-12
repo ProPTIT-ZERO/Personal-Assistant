@@ -1,7 +1,6 @@
 package club.mobile.d21.personalassistant.ui.bottom_sheet
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,10 @@ import android.widget.FrameLayout
 import club.mobile.d21.personalassistant.R
 import club.mobile.d21.personalassistant.databinding.FragmentAddNoteBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.time.LocalDate
 
 class BottomSheetAddNote(
-    private val callBack : CallBack,
+    private val callBack : CallBackNote
 ) : BottomSheetDialogFragment() {
     private lateinit var binding : FragmentAddNoteBinding
     override fun onCreateView(
@@ -38,8 +38,9 @@ class BottomSheetAddNote(
             if(!handleValidation()){
                 return@setOnClickListener
             }
-            callBack.add(String.format("%s-%s-%sT00:00:00Z",binding.yearEditText.text.toString(),
-                binding.monthEditText.text.toString(), binding.dayEditText.text.toString()),
+            callBack.add(LocalDate.of(binding.yearEditText.text.toString().toInt(),
+                binding.monthEditText.text.toString().toInt(),
+                binding.dayEditText.text.toString().toInt()),
                 binding.noteEditText.text.toString())
             dismiss()
         }
@@ -64,6 +65,6 @@ class BottomSheetAddNote(
         return true
     }
 }
-interface CallBack{
-    fun add(date:String, note:String)
+interface CallBackNote{
+    fun add(date: LocalDate, note:String)
 }

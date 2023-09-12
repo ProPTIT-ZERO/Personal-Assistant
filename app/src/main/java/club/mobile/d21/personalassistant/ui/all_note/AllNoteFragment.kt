@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import club.mobile.d21.personalassistant.databinding.FragmentAllNoteBinding
+import club.mobile.d21.personalassistant.ui.adapter.NoteAdapter
 import club.mobile.d21.personalassistant.ui.bottom_sheet.BottomSheetAddNote
-import club.mobile.d21.personalassistant.ui.bottom_sheet.CallBack
+import club.mobile.d21.personalassistant.ui.bottom_sheet.CallBackNote
+import java.time.LocalDate
 
 class AllNoteFragment : Fragment() {
     private var _binding: FragmentAllNoteBinding? = null
@@ -20,12 +22,13 @@ class AllNoteFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAllNoteBinding.inflate(inflater, container, false)
-        val textView: TextView = binding.textView
-        allNoteViewModel.text.observe(viewLifecycleOwner) { text ->
-            textView.text = text
+        val notelist: RecyclerView = binding.noteList
+        allNoteViewModel.note.observe(viewLifecycleOwner) { list
+            -> notelist.adapter = NoteAdapter(list)
         }
+        notelist.layoutManager = LinearLayoutManager(context)
         return binding.root
     }
 
@@ -35,15 +38,14 @@ class AllNoteFragment : Fragment() {
     }
     private fun handleEvents(){
         binding.addButton.setOnClickListener{
-            BottomSheetAddNote(object : CallBack{
-                override fun add(date: String, note: String) {
+            BottomSheetAddNote(object : CallBackNote {
+                override fun add(date: LocalDate, note: String) {
                     allNoteViewModel.addNote(date,note)
                 }
             }
             ).show(childFragmentManager,"Hello bottom")
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

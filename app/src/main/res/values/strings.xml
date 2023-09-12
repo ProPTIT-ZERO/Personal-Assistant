@@ -19,4 +19,8 @@
     <string name="please_enter_the_month">Please enter the month</string>
     <string name="please_enter_the_year">Please enter the year</string>
     <string name="please_enter_your_note">Please enter your note</string>
+    <string name="description">Description</string>
+    <string name="task">Enter your task here</string>
+    <string name="choose">Choose priority</string>
+    <string name="detail">Detail</string>
 </resources>
