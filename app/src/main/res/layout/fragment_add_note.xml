@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_rounded_corner"
-    tools:context=".ui.bottom_sheet.BottomSheetAddNote">
+    tools:context=".ui.all_note.AddNoteFragment">
 
     <ImageView
         android:id="@+id/grabImageView"
@@ -86,7 +86,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/addBtn"
+        android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"

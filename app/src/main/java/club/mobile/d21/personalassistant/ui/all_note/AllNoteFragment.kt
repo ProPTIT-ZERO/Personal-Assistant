@@ -8,10 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import club.mobile.d21.personalassistant.R
 import club.mobile.d21.personalassistant.databinding.FragmentAllNoteBinding
 import club.mobile.d21.personalassistant.ui.adapter.NoteAdapter
-import club.mobile.d21.personalassistant.ui.bottom_sheet.BottomSheetAddNote
-import club.mobile.d21.personalassistant.ui.bottom_sheet.CallBackNote
 import java.time.LocalDate
 
 class AllNoteFragment : Fragment() {
@@ -38,12 +37,17 @@ class AllNoteFragment : Fragment() {
     }
     private fun handleEvents(){
         binding.addButton.setOnClickListener{
-            BottomSheetAddNote(object : CallBackNote {
+            val addNoteFragment = AddNoteFragment.newInstance(object : CallBackNote {
                 override fun add(date: LocalDate, note: String) {
                     allNoteViewModel.addNote(date,note)
                 }
-            }
-            ).show(childFragmentManager,"Hello bottom")
+            })
+            val fragmentManager = parentFragmentManager
+            fragmentManager.beginTransaction()
+                .setReorderingAllowed(true)
+                .replace(R.id.nav_host_fragment_container, addNoteFragment)
+                .addToBackStack(null)
+                .commit()
         }
     }
     override fun onDestroyView() {

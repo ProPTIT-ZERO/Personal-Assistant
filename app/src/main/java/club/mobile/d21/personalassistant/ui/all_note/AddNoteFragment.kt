@@ -1,48 +1,49 @@
-package club.mobile.d21.personalassistant.ui.bottom_sheet
+package club.mobile.d21.personalassistant.ui.all_note
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
+import androidx.fragment.app.Fragment
 import club.mobile.d21.personalassistant.R
 import club.mobile.d21.personalassistant.databinding.FragmentAddNoteBinding
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.time.LocalDate
 
-class BottomSheetAddNote(
-    private val callBack : CallBackNote
-) : BottomSheetDialogFragment() {
-    private lateinit var binding : FragmentAddNoteBinding
+class AddNoteFragment() : Fragment() {
+    private var _binding: FragmentAddNoteBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var callBackNote: CallBackNote
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        dialog?.setOnShowListener {
-            val frameLayout: FrameLayout? =
-                dialog?.findViewById(com.google.android.material.R.id.design_bottom_sheet)
-            frameLayout?.setBackgroundResource(android.R.color.transparent)
-        }
-        binding = FragmentAddNoteBinding.inflate(inflater, container, false)
+    ): View? {
+        _binding = FragmentAddNoteBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initEvent()
         super.onViewCreated(view, savedInstanceState)
+        initEvent()
     }
-
     private fun initEvent() {
-        binding.addBtn.setOnClickListener {
+        binding.addButton.setOnClickListener {
             if(!handleValidation()){
                 return@setOnClickListener
             }
-            callBack.add(LocalDate.of(binding.yearEditText.text.toString().toInt(),
+            callBackNote.add(LocalDate.of(binding.yearEditText.text.toString().toInt(),
                 binding.monthEditText.text.toString().toInt(),
                 binding.dayEditText.text.toString().toInt()),
                 binding.noteEditText.text.toString())
-            dismiss()
+            val fragmentManager = parentFragmentManager
+            fragmentManager.beginTransaction().remove(this).commit()
+            fragmentManager.popBackStack()
+        }
+    }
+    companion object {
+        fun newInstance(callBackNote: CallBackNote): AddNoteFragment {
+            val fragment = AddNoteFragment()
+            fragment.callBackNote = callBackNote
+            return fragment
         }
     }
     private fun handleValidation(): Boolean {
@@ -64,7 +65,12 @@ class BottomSheetAddNote(
         }
         return true
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
+
 interface CallBackNote{
     fun add(date: LocalDate, note:String)
 }
