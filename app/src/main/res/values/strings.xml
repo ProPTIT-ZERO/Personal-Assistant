@@ -23,4 +23,5 @@
     <string name="task">Enter your task here</string>
     <string name="choose">Choose priority</string>
     <string name="detail">Detail</string>
+    <string name="setDatePicker">Set date picker</string>
 </resources>

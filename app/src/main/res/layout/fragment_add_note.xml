@@ -17,67 +17,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dayTextInputLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/setDate"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:hint="@string/day"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/ic_set_date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grabImageView">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dayEditText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/monthTextInputLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:hint="@string/month"
+        android:background="@color/transparent"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/setDate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dayTextInputLayout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/monthEditText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/yearTextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:hint="@string/year"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monthTextInputLayout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/yearEditText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintStart_toEndOf="@+id/setDate"
+        app:layout_constraintTop_toTopOf="@+id/setDate"
+        android:textSize="24sp"
+        android:padding="8dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/noteTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:hint="@string/note"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yearTextInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/setDate">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/noteEditText"
@@ -89,17 +62,15 @@
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="128dp"
         android:background="@drawable/bg_save_button"
         android:paddingHorizontal="56dp"
-        android:paddingVertical="10dp"
+        android:paddingVertical="12dp"
         android:text="@string/add"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yearTextInputLayout" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
