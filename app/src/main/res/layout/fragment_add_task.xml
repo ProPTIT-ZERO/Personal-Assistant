@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_rounded_corner"
-    tools:context=".ui.bottom_sheet.BottomSheetAddTask">
+    tools:context=".ui.all_task.AddTaskFragment">
 
     <ImageView
         android:id="@+id/grabImageView"
@@ -17,6 +17,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/setDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/ic_set_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_purple_button"
+        android:text="Set your date here"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/setDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/setDate"
+        app:layout_constraintTop_toTopOf="@+id/setDate"
+        android:textSize="24sp"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/setTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_set_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setDate"  />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_purple_button"
+        android:text="Set your deadline here"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/setTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/setTime"
+        app:layout_constraintTop_toTopOf="@+id/setTime"
+        android:textSize="24sp"
+        android:padding="8dp"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/taskTextInputLayout"
         android:layout_width="match_parent"
@@ -26,7 +76,7 @@
         android:hint="@string/task"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grabImageView">
+        app:layout_constraintTop_toBottomOf="@+id/setTime">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/taskEditText"
@@ -34,21 +84,38 @@
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/priorityInputLayout"
+    <RadioGroup
+        android:id="@+id/choosePriority"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:hint="@string/choose"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskTextInputLayout">
-        <Spinner
-            android:id="@+id/choosePriority"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/taskTextInputLayout"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/chooseCritical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/critical"
+            android:background="@color/red"/>
+        <RadioButton
+            android:id="@+id/chooseImportant"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/important"
+            android:background="@color/yellow"/>
+        <RadioButton
+            android:id="@+id/chooseLowPriority"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/low_priority"
+            android:background="@color/green" />
+    </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/detailTextInputLayout"
@@ -59,26 +126,27 @@
         android:hint="@string/detail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priorityInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/choosePriority">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/detailEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
-        android:id="@+id/dayPicker"
+        android:id="@+id/createButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/bg_save_button"
-        android:padding="16dp"
-        android:text="Set your deadline"
-        android:textColor="@color/white"
+        android:layout_marginBottom="128dp"
+        android:background="@drawable/bg_purple_button"
+        android:paddingHorizontal="56dp"
+        android:paddingVertical="12dp"
         android:textSize="24sp"
+        android:text="@string/create"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailTextInputLayout" />
-
-
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

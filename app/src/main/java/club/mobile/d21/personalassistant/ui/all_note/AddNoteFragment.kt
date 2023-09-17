@@ -35,11 +35,10 @@ class AddNoteFragment : Fragment() {
                     datePicker, year:Int, month:Int, day:Int ->
                     selectedDate = LocalDate.of(year, month+1,day)
                 binding.date.text = String.format("%2d / %2d / %4d",day,month,year)
-                binding.date.setBackgroundResource(R.drawable.bg_save_button)
             },calendar.get(YEAR),
                 calendar.get(MONTH),
                 calendar.get(DAY_OF_MONTH))
-                datePickerDialog.show()
+            datePickerDialog.show()
         }
         binding.addButton.setOnClickListener {
             if(selectedDate == null || !handleValidation()){

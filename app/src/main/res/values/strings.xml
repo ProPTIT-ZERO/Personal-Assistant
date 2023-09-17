@@ -15,13 +15,12 @@
     <string name="save">SAVE</string>
     <string name="add">ADD</string>
     <string name="note">Note</string>
-    <string name="please_enter_the_date">Please enter the date</string>
-    <string name="please_enter_the_month">Please enter the month</string>
-    <string name="please_enter_the_year">Please enter the year</string>
     <string name="please_enter_your_note">Please enter your note</string>
+    <string name="please_enter_your_task">Please enter your task</string>
     <string name="description">Description</string>
     <string name="task">Enter your task here</string>
     <string name="choose">Choose priority</string>
     <string name="detail">Detail</string>
     <string name="setDatePicker">Set date picker</string>
+    <string name="create">Create</string>
 </resources>
