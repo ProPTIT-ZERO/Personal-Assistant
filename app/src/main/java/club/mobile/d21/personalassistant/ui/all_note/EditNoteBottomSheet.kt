@@ -18,7 +18,7 @@ import java.util.Calendar
 
 class EditNoteBottomSheet(selectedNote: Note) : BottomSheetDialogFragment() {
     private lateinit var binding : BottomSheetEditNoteBinding
-    private val allNoteViewModel: AllNoteViewModel by viewModels()
+    private val allNoteViewModel: AllNoteViewModel by activityViewModels()
     private var note = selectedNote
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +48,7 @@ class EditNoteBottomSheet(selectedNote: Note) : BottomSheetDialogFragment() {
             val datePickerDialog = DatePickerDialog(requireContext(),{
                     datePicker, year:Int, month:Int, day:Int ->
                 selectedDate = LocalDate.of(year, month+1,day)
-                binding.date.text = String.format("%4d-%2d-%2d",day,month,year)
+                binding.date.text = String.format("%4d-%2d-%2d",day,month+1,year)
             },calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH))

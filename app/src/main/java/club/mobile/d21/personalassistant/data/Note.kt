@@ -23,9 +23,6 @@ interface NoteDAO{
     @Query("SELECT * FROM note WHERE id = :hqaId")
     fun getNoteById(hqaId: Int): Note
 
-    @Query("SELECT * FROM note WHERE date(date) = date('now')")
-    fun getAllNoteToday(): List<Note>
-
     @Query("SELECT * FROM note WHERE content = :hqaContent")
     fun findNote(hqaContent: String): Note
 
@@ -34,6 +31,9 @@ interface NoteDAO{
 
     @Insert
     fun addNote(newNote: Note)
+
+    @Query("SELECT * FROM note WHERE date('date') = date('now') OR date('date') = date('now', '+1 day')")
+    fun getNotesForTodayAndTomorrow(): List<Note>
 
     @Update
     fun updateNote(vararg wrongNote: Note)

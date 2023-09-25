@@ -1,5 +1,6 @@
 package club.mobile.d21.personalassistant.ui.all_task
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,13 +38,30 @@ class ClassifiedTaskFragment : Fragment() {
             val taskList = list.filter {it.priority == priority }
             taskListBinding.adapter = TaskAdapter(taskList,
                 onDeleteClick = {selectedTask->
-                    allTaskViewModel.deleteTask(selectedTask)
+                    val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                    alertDialogBuilder.setTitle("Confirm")
+                    alertDialogBuilder.setMessage("Are you sure you want to delete this task?")
+                    alertDialogBuilder.setPositiveButton("YES") { _, _ ->
+                        allTaskViewModel.deleteTask(selectedTask)
+                    }
+                    alertDialogBuilder.setNegativeButton("NO") { _, _ ->}
+                    val alertDialog = alertDialogBuilder.create()
+                    alertDialog.show()
                 },
                 onEditClick = {selectedTask->
-                    allTaskViewModel.editTask(selectedTask)
+                    val bottomSheet = EditTaskBottomSheet(selectedTask)
+                    bottomSheet.show(childFragmentManager, bottomSheet.tag)
                 },
                 onDoneClick = {selectedTask->
-                    selectedTask.id?.let { allTaskViewModel.doneTask(it) }
+                    val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                    alertDialogBuilder.setTitle("Confirm")
+                    alertDialogBuilder.setMessage("Are you sure this task has been completed?")
+                    alertDialogBuilder.setPositiveButton("YES") { _, _ ->
+                        selectedTask.id?.let { allTaskViewModel.doneTask(it) }
+                    }
+                    alertDialogBuilder.setNegativeButton("NO") { _, _ ->}
+                    val alertDialog = alertDialogBuilder.create()
+                    alertDialog.show()
                 })
         }
 

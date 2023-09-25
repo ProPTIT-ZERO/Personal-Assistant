@@ -1,6 +1,5 @@
 package club.mobile.d21.personalassistant.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,8 @@ import club.mobile.d21.personalassistant.R
 import club.mobile.d21.personalassistant.data.Note
 import java.time.format.DateTimeFormatter
 
-class NoteAdapter(private val notes: List<Note>,private val onEditClick: (Note) -> Unit,
-    private val onDeleteClick: (Note) -> Unit) :
+class NoteAdapter(private val notes: List<Note>, private val onEditClick: (Note) -> Unit,
+                  private val onDeleteClick: (Note) -> Unit) :
     RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val date: TextView = itemView.findViewById(R.id.date)

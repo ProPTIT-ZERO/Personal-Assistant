@@ -20,9 +20,9 @@ class AllTaskViewModel(application: Application): AndroidViewModel(application) 
     private val _task = MutableLiveData<List<Task>>()
     init{
         viewModelScope.launch(Dispatchers.IO) {
-            val defaultTask = Task(null,"Làm sinh nhật Quốc Anh", Priority.CRITICAL,
-                LocalDate.of(2023,10,20).toString(),
-                LocalTime.of(0,0,0).toString(),"Mua bánh kẹo")
+            val defaultTask = Task(null,"Báo cáo tiến độ app", Priority.CRITICAL,
+                LocalDate.of(2023,9,25).toString(),
+                LocalTime.of(20,0,0).toString(),"Code app")
             if(taskDAO.getRowCount()==0) {
                 taskDAO.addTask(defaultTask)
             }
@@ -76,6 +76,11 @@ class AllTaskViewModel(application: Application): AndroidViewModel(application) 
     internal suspend fun getLowPriorityTask(): List<Task> {
         return withContext(Dispatchers.IO) {
             taskDAO.getLowPriorityTasks()
+        }
+    }
+    internal suspend fun getTodayTask(): List<Task> {
+        return withContext(Dispatchers.IO) {
+            taskDAO.getTasksForTodayAndTomorrow()
         }
     }
     val task: LiveData<List<Task>> = _task

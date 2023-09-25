@@ -49,6 +49,9 @@ interface TaskDAO{
     @Query("UPDATE task SET done = 1 WHERE id = :taskId")
     fun markTaskAsDone(taskId: Int)
 
+    @Query("SELECT * FROM task WHERE date('deadlineDay') = date('now') OR date('deadlineDay') = date('now', '+1 day')")
+    fun getTasksForTodayAndTomorrow(): List<Task>
+
     @Insert
     fun addTask(newTask: Task)
 
