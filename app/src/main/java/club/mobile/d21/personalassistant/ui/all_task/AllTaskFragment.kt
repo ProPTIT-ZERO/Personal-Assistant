@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Spinner
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import club.mobile.d21.personalassistant.R
 import club.mobile.d21.personalassistant.data.Priority
 import club.mobile.d21.personalassistant.databinding.FragmentAllTaskBinding
-import club.mobile.d21.personalassistant.ui.adapter.UrgencyAdapter
+import club.mobile.d21.personalassistant.ui.adapter.ClassifiedAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -20,7 +19,7 @@ import java.time.LocalTime
 class AllTaskFragment : Fragment() {
     private var _binding: FragmentAllTaskBinding? = null
     private val binding get() = _binding!!
-    private val allTaskViewModel: AllTaskViewModel by viewModels()
+    private val allTaskViewModel: AllTaskViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,20 +38,18 @@ class AllTaskFragment : Fragment() {
             val criticalTasks = allTaskViewModel.getCriticalTask()
             val importantTasks = allTaskViewModel.getImportantTask()
             val lowPriorityTasks = allTaskViewModel.getLowPriorityTask()
-
             val fragmentList = listOf(
-                DetailFragment.newInstance(criticalTasks),
-                DetailFragment.newInstance(importantTasks),
-                DetailFragment.newInstance(lowPriorityTasks)
+                ClassifiedTaskFragment.newInstance(Priority.CRITICAL),
+                ClassifiedTaskFragment.newInstance(Priority.IMPORTANT),
+                ClassifiedTaskFragment.newInstance(Priority.LOW_PRIORITY)
             )
-
             val tabTitle = listOf(
                 getString(R.string.critical), getString(R.string.important),
                 getString(R.string.low_priority)
             )
             val adapter =
                 activity?.supportFragmentManager?.let {
-                    UrgencyAdapter(
+                    ClassifiedAdapter(
                         it,
                         lifecycle,
                         fragmentList

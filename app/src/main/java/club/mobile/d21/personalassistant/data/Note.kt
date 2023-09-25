@@ -11,7 +11,7 @@ import androidx.room.Update
 
 @Entity(tableName = "note")
 data class Note(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int?,
     @ColumnInfo(name = "content") val content: String?,
     @ColumnInfo(name = "date") val date: String
 )

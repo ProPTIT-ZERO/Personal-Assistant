@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.all_task.DetailFragment">
+    tools:context=".ui.all_task.ClassifiedTaskFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_task"
@@ -14,5 +14,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="48dp"
         android:textSize="24sp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

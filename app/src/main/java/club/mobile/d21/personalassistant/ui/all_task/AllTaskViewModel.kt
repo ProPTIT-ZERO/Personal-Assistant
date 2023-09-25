@@ -1,8 +1,8 @@
 package club.mobile.d21.personalassistant.ui.all_task
 
 import android.app.Application
-import android.widget.Spinner
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import club.mobile.d21.personalassistant.data.AppDatabase
@@ -20,12 +20,13 @@ class AllTaskViewModel(application: Application): AndroidViewModel(application) 
     private val _task = MutableLiveData<List<Task>>()
     init{
         viewModelScope.launch(Dispatchers.IO) {
-            val defaultTask = Task(1,"Làm sinh nhật Quốc Anh", Priority.CRITICAL,
+            val defaultTask = Task(null,"Làm sinh nhật Quốc Anh", Priority.CRITICAL,
                 LocalDate.of(2023,10,20).toString(),
                 LocalTime.of(0,0,0).toString(),"Mua bánh kẹo")
             if(taskDAO.getRowCount()==0) {
                 taskDAO.addTask(defaultTask)
             }
+            _task.postValue(taskDAO.getAll())
         }
     }
     internal fun addTask(
@@ -33,9 +34,33 @@ class AllTaskViewModel(application: Application): AndroidViewModel(application) 
         date:LocalDate, time: LocalTime, detail:String){
         viewModelScope.launch(Dispatchers.IO) {
             taskDAO.addTask(
-                Task(taskDAO.getRowCount() + 1, task,
-                    priority, date.toString(), time.toString(), detail)
+                Task(null, task, priority, date.toString(), time.toString(), detail)
             )
+            _task.postValue(taskDAO.getAll())
+        }
+    }
+    internal fun deleteTask(deletedTask: Task){
+        viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch(Dispatchers.IO) {
+                taskDAO.deleteTask(deletedTask)
+                _task.postValue(taskDAO.getAll())
+            }
+        }
+    }
+    internal fun editTask(editedTask: Task){
+        viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch(Dispatchers.IO) {
+                taskDAO.updateTask(editedTask)
+                _task.postValue(taskDAO.getAll())
+            }
+        }
+    }
+    internal fun doneTask(ID: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch(Dispatchers.IO) {
+                taskDAO.markTaskAsDone(ID)
+                _task.postValue(taskDAO.getAll())
+            }
         }
     }
     internal suspend fun getCriticalTask(): List<Task> {
@@ -53,5 +78,5 @@ class AllTaskViewModel(application: Application): AndroidViewModel(application) 
             taskDAO.getLowPriorityTasks()
         }
     }
-    var task: MutableLiveData<List<Task>> = _task
+    val task: LiveData<List<Task>> = _task
 }

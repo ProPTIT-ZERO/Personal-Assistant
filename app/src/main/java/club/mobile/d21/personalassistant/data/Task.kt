@@ -1,6 +1,5 @@
 package club.mobile.d21.personalassistant.data
 
-import android.widget.Spinner
 import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Delete
@@ -18,12 +17,13 @@ enum class Priority{
 }
 @Entity(tableName = "task")
 data class Task(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int?,
     @ColumnInfo(name = "task") val task: String?,
     @ColumnInfo(name = "priority") val priority: Priority,
     @ColumnInfo(name = "deadline_day") val deadlineDay: String?,
     @ColumnInfo(name = "deadline_time") val deadlineTime: String?,
-    @ColumnInfo(name = "detail") val detail:String
+    @ColumnInfo(name = "detail") val detail:String,
+    @ColumnInfo(name = "done") val done:Boolean = false
  )
 
 @Dao
@@ -45,6 +45,9 @@ interface TaskDAO{
 
     @Query("SELECT COUNT(*) FROM task")
     fun getRowCount(): Int
+
+    @Query("UPDATE task SET done = 1 WHERE id = :taskId")
+    fun markTaskAsDone(taskId: Int)
 
     @Insert
     fun addTask(newTask: Task)

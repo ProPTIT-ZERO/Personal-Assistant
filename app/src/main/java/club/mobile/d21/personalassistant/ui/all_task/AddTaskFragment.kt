@@ -12,7 +12,11 @@ import club.mobile.d21.personalassistant.data.Priority
 import club.mobile.d21.personalassistant.databinding.FragmentAddTaskBinding
 import java.time.LocalDate
 import java.time.LocalTime
-import java.util.Calendar.*
+import java.util.Calendar.DAY_OF_MONTH
+import java.util.Calendar.MONTH
+import java.util.Calendar.YEAR
+import java.util.Calendar.getInstance
+
 class AddTaskFragment: Fragment() {
     private var _binding: FragmentAddTaskBinding? = null
     private val binding get() = _binding!!
@@ -79,7 +83,6 @@ class AddTaskFragment: Fragment() {
             }
             callBackTask.add(binding.taskEditText.text.toString(), priority!!,
                 selectedDate!!, selectedTime!!, binding.detailEditText.text.toString())
-
             val fragmentManager = parentFragmentManager
             fragmentManager.beginTransaction().remove(this).commit()
             fragmentManager.popBackStack()

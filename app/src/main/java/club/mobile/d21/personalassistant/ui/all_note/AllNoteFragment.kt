@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import club.mobile.d21.personalassistant.R
+import club.mobile.d21.personalassistant.data.Note
 import club.mobile.d21.personalassistant.databinding.FragmentAllNoteBinding
 import club.mobile.d21.personalassistant.ui.adapter.NoteAdapter
 import java.time.LocalDate
@@ -25,7 +26,13 @@ class AllNoteFragment : Fragment() {
         _binding = FragmentAllNoteBinding.inflate(inflater, container, false)
         val notelist: RecyclerView = binding.noteList
         allNoteViewModel.note.observe(viewLifecycleOwner) { list
-            -> notelist.adapter = NoteAdapter(list)
+            -> notelist.adapter = NoteAdapter(list,
+            onEditClick = { selectedNote ->
+                val bottomSheet = EditNoteBottomSheet(selectedNote)
+                bottomSheet.show(childFragmentManager, bottomSheet.tag) },
+            onDeleteClick = {selectedNote->
+                allNoteViewModel.deleteNote(selectedNote)
+            })
         }
         notelist.layoutManager = LinearLayoutManager(context)
         return binding.root
@@ -37,7 +44,7 @@ class AllNoteFragment : Fragment() {
     }
     private fun handleEvents(){
         binding.addButton.setOnClickListener{
-            val addNoteFragment = AddNoteFragment.newInstance(object : CallBackNote {
+            val addNoteFragment = AddNoteFragment.newInstance(object : CallBackAddNote {
                 override fun add(date: LocalDate, note: String) {
                     allNoteViewModel.addNote(date,note)
                 }

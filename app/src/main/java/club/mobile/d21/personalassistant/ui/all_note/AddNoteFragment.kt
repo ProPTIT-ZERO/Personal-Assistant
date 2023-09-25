@@ -14,7 +14,7 @@ import java.util.Calendar.*
 class AddNoteFragment : Fragment() {
     private var _binding: FragmentAddNoteBinding? = null
     private val binding get() = _binding!!
-    private lateinit var callBackNote: CallBackNote
+    private lateinit var callBackAddNote: CallBackAddNote
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,7 +44,7 @@ class AddNoteFragment : Fragment() {
             if(selectedDate == null || !handleValidation()){
                 return@setOnClickListener
             }
-            callBackNote.add(selectedDate!!,
+            callBackAddNote.add(selectedDate!!,
                 binding.noteEditText.text.toString())
             val fragmentManager = parentFragmentManager
             fragmentManager.beginTransaction().remove(this).commit()
@@ -52,9 +52,9 @@ class AddNoteFragment : Fragment() {
         }
     }
     companion object {
-        fun newInstance(callBackNote: CallBackNote): AddNoteFragment {
+        fun newInstance(callBackAddNote: CallBackAddNote): AddNoteFragment {
             val fragment = AddNoteFragment()
-            fragment.callBackNote = callBackNote
+            fragment.callBackAddNote = callBackAddNote
             return fragment
         }
     }
@@ -71,6 +71,6 @@ class AddNoteFragment : Fragment() {
     }
 }
 
-interface CallBackNote{
+interface CallBackAddNote{
     fun add(date: LocalDate, note:String)
 }

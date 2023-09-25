@@ -14,6 +14,7 @@
     <string name="year">Year</string>
     <string name="save">SAVE</string>
     <string name="add">ADD</string>
+    <string name="change">CHANGE</string>
     <string name="note">Note</string>
     <string name="please_enter_your_note">Please enter your note</string>
     <string name="please_enter_your_task">Please enter your task</string>
