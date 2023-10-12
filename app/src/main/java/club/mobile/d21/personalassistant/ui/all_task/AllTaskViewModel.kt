@@ -18,15 +18,17 @@ class AllTaskViewModel(application: Application): AndroidViewModel(application) 
     private val data = AppDatabase.getTaskDatabase(application.applicationContext)
     private val taskDAO = data.taskDAO()
     private val _task = MutableLiveData<List<Task>>()
+    private val _task4today = MutableLiveData<List<Task>>()
     init{
         viewModelScope.launch(Dispatchers.IO) {
             val defaultTask = Task(null,"Báo cáo tiến độ app", Priority.CRITICAL,
-                LocalDate.of(2023,9,25).toString(),
+                LocalDate.now().toString(),
                 LocalTime.of(20,0,0).toString(),"Code app")
-            if(taskDAO.getRowCount()==0) {
+            if(taskDAO.getRowCount() == 0) {
                 taskDAO.addTask(defaultTask)
             }
             _task.postValue(taskDAO.getAll())
+            _task4today.postValue(taskDAO.getTasksForTodayAndTomorrow())
         }
     }
     internal fun addTask(
@@ -37,6 +39,7 @@ class AllTaskViewModel(application: Application): AndroidViewModel(application) 
                 Task(null, task, priority, date.toString(), time.toString(), detail)
             )
             _task.postValue(taskDAO.getAll())
+            _task4today.postValue(taskDAO.getTasksForTodayAndTomorrow())
         }
     }
     internal fun deleteTask(deletedTask: Task){
@@ -44,6 +47,7 @@ class AllTaskViewModel(application: Application): AndroidViewModel(application) 
             viewModelScope.launch(Dispatchers.IO) {
                 taskDAO.deleteTask(deletedTask)
                 _task.postValue(taskDAO.getAll())
+                _task4today.postValue(taskDAO.getTasksForTodayAndTomorrow())
             }
         }
     }
@@ -52,6 +56,7 @@ class AllTaskViewModel(application: Application): AndroidViewModel(application) 
             viewModelScope.launch(Dispatchers.IO) {
                 taskDAO.updateTask(editedTask)
                 _task.postValue(taskDAO.getAll())
+                _task4today.postValue(taskDAO.getTasksForTodayAndTomorrow())
             }
         }
     }
@@ -60,6 +65,16 @@ class AllTaskViewModel(application: Application): AndroidViewModel(application) 
             viewModelScope.launch(Dispatchers.IO) {
                 taskDAO.markTaskAsDone(ID)
                 _task.postValue(taskDAO.getAll())
+                _task4today.postValue(taskDAO.getTasksForTodayAndTomorrow())
+            }
+        }
+    }
+    internal fun undoneTask(ID: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch(Dispatchers.IO) {
+                taskDAO.markTaskAsUndone(ID)
+                _task.postValue(taskDAO.getAll())
+                _task4today.postValue(taskDAO.getTasksForTodayAndTomorrow())
             }
         }
     }
@@ -78,10 +93,6 @@ class AllTaskViewModel(application: Application): AndroidViewModel(application) 
             taskDAO.getLowPriorityTasks()
         }
     }
-    internal suspend fun getTodayTask(): List<Task> {
-        return withContext(Dispatchers.IO) {
-            taskDAO.getTasksForTodayAndTomorrow()
-        }
-    }
     val task: LiveData<List<Task>> = _task
+    val task4today: LiveData<List<Task>> = _task4today
 }

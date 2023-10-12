@@ -21,10 +21,10 @@
         android:label="@string/all_note"
         tools:layout="@layout/fragment_all_note" />
     <fragment
-        android:id="@+id/navigation_assistant"
-        android:name="club.mobile.d21.personalassistant.ui.assistant.AssistantFragment"
-        android:label="@string/assistant"
-        tools:layout="@layout/fragment_assistant"/>
+        android:id="@+id/navigation_alarm"
+        android:name="club.mobile.d21.personalassistant.ui.alarm.AlarmFragment"
+        android:label="@string/alarm"
+        tools:layout="@layout/fragment_alarm"/>
     <fragment
         android:id="@+id/navigation_profile"
         android:name="club.mobile.d21.personalassistant.ui.profile.ProfileFragment"

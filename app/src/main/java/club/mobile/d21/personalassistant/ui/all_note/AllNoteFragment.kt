@@ -7,13 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import club.mobile.d21.personalassistant.R
 import club.mobile.d21.personalassistant.databinding.FragmentAllNoteBinding
 import club.mobile.d21.personalassistant.ui.adapter.NoteAdapter
-import club.mobile.d21.personalassistant.ui.all_task.AllTaskViewModel
 import java.time.LocalDate
 
 class AllNoteFragment : Fragment() {
@@ -31,8 +29,8 @@ class AllNoteFragment : Fragment() {
             -> noteList.adapter = NoteAdapter(list,
             onEditClick = { selectedNote ->
                 val bottomSheet = EditNoteBottomSheet(selectedNote)
-                bottomSheet.show(childFragmentManager, bottomSheet.tag) }
-            ) { selectedNote ->
+                bottomSheet.show(childFragmentManager, bottomSheet.tag) },
+            onDeleteClick = { selectedNote ->
                 val alertDialogBuilder = AlertDialog.Builder(requireContext())
                 alertDialogBuilder.setTitle("Confirm")
                 alertDialogBuilder.setMessage("Are you sure you want to delete this note?")
@@ -42,7 +40,7 @@ class AllNoteFragment : Fragment() {
                 alertDialogBuilder.setNegativeButton("NO") { _, _ -> }
                 val alertDialog = alertDialogBuilder.create()
                 alertDialog.show()
-            }
+            })
         }
         noteList.layoutManager = LinearLayoutManager(context)
         return binding.root

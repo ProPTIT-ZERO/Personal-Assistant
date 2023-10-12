@@ -34,7 +34,7 @@ class AddNoteFragment : Fragment() {
             val datePickerDialog = DatePickerDialog(requireContext(),{
                     datePicker, year:Int, month:Int, day:Int ->
                     selectedDate = LocalDate.of(year, month+1,day)
-                binding.date.text = String.format("%2d / %2d / %4d",day,month,year)
+                binding.date.text = String.format("%2d / %2d / %4d",day,month+1,year)
             },calendar.get(YEAR),
                 calendar.get(MONTH),
                 calendar.get(DAY_OF_MONTH))

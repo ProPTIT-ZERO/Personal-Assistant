@@ -53,7 +53,7 @@ class TodayFragment : Fragment() {
         noteList.layoutManager = LinearLayoutManager(context)
 
         val taskList: RecyclerView = binding.taskList
-        allTaskViewModel.task.observe(viewLifecycleOwner) { list ->
+        allTaskViewModel.task4today.observe(viewLifecycleOwner) { list ->
             taskList.adapter = TaskAdapter(list,
                 onDeleteClick = {selectedTask->
                     val alertDialogBuilder = AlertDialog.Builder(requireContext())
@@ -76,6 +76,17 @@ class TodayFragment : Fragment() {
                     alertDialogBuilder.setMessage("Are you sure this task has been completed?")
                     alertDialogBuilder.setPositiveButton("YES") { _, _, ->
                         selectedTask.id?.let { allTaskViewModel.doneTask(it) }
+                    }
+                    alertDialogBuilder.setNegativeButton("NO"){_,_,->}
+                    val alertDialog = alertDialogBuilder.create()
+                    alertDialog.show()
+                },
+                onUndoneClick = {selectedTask->
+                    val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                    alertDialogBuilder.setTitle("Confirm")
+                    alertDialogBuilder.setMessage("Are you sure you want to mark this task as incomplete?")
+                    alertDialogBuilder.setPositiveButton("YES") { _, _, ->
+                        selectedTask.id?.let { allTaskViewModel.undoneTask(it) }
                     }
                     alertDialogBuilder.setNegativeButton("NO"){_,_,->}
                     val alertDialog = alertDialogBuilder.create()

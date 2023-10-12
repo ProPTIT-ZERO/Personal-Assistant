@@ -14,7 +14,8 @@ import club.mobile.d21.personalassistant.data.Task
 class TaskAdapter(private val tasks: List<Task>,
     private val onDeleteClick:(Task)-> Unit,
     private val onEditClick:(Task)->Unit,
-    private val onDoneClick:(Task)->Unit) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
+    private val onDoneClick:(Task)->Unit,
+    private val onUndoneClick:(Task)->Unit) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val task: TextView = itemView.findViewById(R.id.task)
         val priority: TextView = itemView.findViewById(R.id.priority)
@@ -22,10 +23,10 @@ class TaskAdapter(private val tasks: List<Task>,
         val detail: TextView = itemView.findViewById(R.id.detail)
         val deleteButton: ImageView = itemView.findViewById(R.id.deleteButton)
         val editButton: ImageView = itemView.findViewById(R.id.editButton)
-        val doneButton: ImageView = itemView.findViewById(R.id.doneButton)
+        val checkButton: ImageView = itemView.findViewById(R.id.checkButton)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.task_layout, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_task, parent, false)
         return ViewHolder(view)
     }
 
@@ -45,8 +46,17 @@ class TaskAdapter(private val tasks: List<Task>,
         holder.editButton.setOnClickListener {
             onEditClick(tasks[position])
         }
-        holder.doneButton.setOnClickListener {
-            onDoneClick(tasks[position])
+        if(tasks[position].done){
+            holder.checkButton.setImageResource(R.drawable.ic_done)
+        }else{
+            holder.checkButton.setImageResource(R.drawable.ic_undone)
+        }
+        holder.checkButton.setOnClickListener {
+            if(tasks[position].done) {
+                onUndoneClick(tasks[position])
+            }else{
+                onDoneClick(tasks[position])
+            }
         }
     }
     override fun getItemCount(): Int {

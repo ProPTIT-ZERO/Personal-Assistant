@@ -20,7 +20,7 @@ class NoteAdapter(private val notes: List<Note>, private val onEditClick: (Note)
         val editButton: ImageView = itemView.findViewById(R.id.editButton)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.note_layout, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_note, parent, false)
         return ViewHolder(view)
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

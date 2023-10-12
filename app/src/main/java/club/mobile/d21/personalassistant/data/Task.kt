@@ -28,7 +28,7 @@ data class Task(
 
 @Dao
 interface TaskDAO{
-    @Query("SELECT * FROM task")
+    @Query("SELECT * FROM task ORDER BY deadline_day ASC, deadline_time ASC")
     fun getAll(): List<Task>
 
     @Query("SELECT * FROM task WHERE id = :hqaId")
@@ -49,8 +49,15 @@ interface TaskDAO{
     @Query("UPDATE task SET done = 1 WHERE id = :taskId")
     fun markTaskAsDone(taskId: Int)
 
-    @Query("SELECT * FROM task WHERE date('deadlineDay') = date('now') OR date('deadlineDay') = date('now', '+1 day')")
+    @Query("UPDATE task SET done = 0 WHERE id = :taskId")
+    fun markTaskAsUndone(taskId: Int)
+
+    @Query("SELECT * FROM task WHERE deadline_day = date('now')" +
+            " OR deadline_day = date('now', '+1 day') ORDER BY deadline_day ASC, deadline_time ASC")
     fun getTasksForTodayAndTomorrow(): List<Task>
+
+    @Query("DELETE FROM task")
+    fun clearAllTask()
 
     @Insert
     fun addTask(newTask: Task)

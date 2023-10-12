@@ -13,7 +13,7 @@
         android:icon="@drawable/ic_note"
         android:title="@string/all_note" />
     <item
-        android:id="@+id/navigation_assistant"
-        android:icon="@drawable/ic_android"
-        android:title="@string/assistant"/>
+        android:id="@+id/navigation_alarm"
+        android:icon="@drawable/ic_alarm"
+        android:title="@string/alarm"/>
 </menu>

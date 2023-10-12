@@ -32,15 +32,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_purple_button"
+        android:padding="8dp"
         android:text="Set your date here"
         android:textColor="@color/white"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/setDate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/setDate"
-        app:layout_constraintTop_toTopOf="@+id/setDate"
-        android:textSize="24sp"
-        android:padding="8dp"/>
+        app:layout_constraintTop_toTopOf="@+id/setDate" />
 
     <TextView
         android:id="@+id/setTime"
@@ -50,22 +50,22 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/ic_set_time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setDate"  />
+        app:layout_constraintTop_toBottomOf="@+id/setDate" />
 
     <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_purple_button"
+        android:padding="8dp"
         android:text="Set your deadline here"
         android:textColor="@color/white"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/setTime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/setTime"
-        app:layout_constraintTop_toTopOf="@+id/setTime"
-        android:textSize="24sp"
-        android:padding="8dp"/>
+        app:layout_constraintTop_toTopOf="@+id/setTime" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/taskTextInputLayout"
@@ -88,33 +88,39 @@
         android:id="@+id/choosePriority"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskTextInputLayout"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="16dp"
-        android:orientation="horizontal">
+        app:layout_constraintTop_toBottomOf="@+id/taskTextInputLayout">
+
         <RadioButton
             android:id="@+id/chooseCritical"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/red"
             android:text="@string/critical"
-            android:background="@color/red"/>
+            android:textSize="12dp" />
+
         <RadioButton
             android:id="@+id/chooseImportant"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/yellow"
             android:text="@string/important"
-            android:background="@color/yellow"/>
+            android:textSize="12dp" />
+
         <RadioButton
             android:id="@+id/chooseLowPriority"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/green"
             android:text="@string/low_priority"
-            android:background="@color/green" />
+            android:textSize="12dp" />
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -142,9 +148,9 @@
         android:background="@drawable/bg_purple_button"
         android:paddingHorizontal="56dp"
         android:paddingVertical="12dp"
-        android:textSize="24sp"
         android:text="@string/create"
         android:textColor="@color/white"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

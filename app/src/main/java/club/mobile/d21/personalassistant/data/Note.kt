@@ -17,7 +17,7 @@ data class Note(
 )
 @Dao
 interface NoteDAO{
-    @Query("SELECT * FROM note")
+    @Query("SELECT * FROM note ORDER BY date ASC")
     fun getAll(): List<Note>
 
     @Query("SELECT * FROM note WHERE id = :hqaId")
@@ -32,7 +32,7 @@ interface NoteDAO{
     @Insert
     fun addNote(newNote: Note)
 
-    @Query("SELECT * FROM note WHERE date('date') = date('now') OR date('date') = date('now', '+1 day')")
+    @Query("SELECT * FROM note WHERE date = date('now') OR date = date('now', '+1 day') ORDER BY date ASC")
     fun getNotesForTodayAndTomorrow(): List<Note>
 
     @Update

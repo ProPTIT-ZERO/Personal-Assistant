@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_today,R.id.navigation_task,
-                R.id.navigation_note,R.id.navigation_assistant)
+                R.id.navigation_note,R.id.navigation_alarm)
             )
         navView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener{
@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_note->{
                     binding.toolbar.title = getString(R.string.all_note)
                 }
-                R.id.navigation_assistant->{
-                    binding.toolbar.title = getString(R.string.assistant)
+                R.id.navigation_alarm->{
+                    binding.toolbar.title = getString(R.string.alarm)
                 }
             }
             if (destination.id != R.id.navigation_profile) {

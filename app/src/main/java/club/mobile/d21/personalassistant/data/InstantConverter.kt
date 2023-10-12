@@ -14,12 +14,4 @@ class InstantConverter {
     fun fromMilliToInstant(millis: Long): Instant {
         return Instant.ofEpochMilli(millis)
     }
-    @TypeConverter
-    fun fromStringToInstant(string: String):Instant{
-        return Instant.parse(string)
-    }
-    @TypeConverter
-    fun fromInstantToString(instant: Instant):String{
-        return instant.toString()
-    }
 }

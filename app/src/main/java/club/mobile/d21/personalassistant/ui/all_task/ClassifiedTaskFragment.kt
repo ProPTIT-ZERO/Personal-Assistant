@@ -62,6 +62,17 @@ class ClassifiedTaskFragment : Fragment() {
                     alertDialogBuilder.setNegativeButton("NO") { _, _ ->}
                     val alertDialog = alertDialogBuilder.create()
                     alertDialog.show()
+                },
+                onUndoneClick = { selectedTask->
+                    val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                    alertDialogBuilder.setTitle("Confirm")
+                    alertDialogBuilder.setMessage("Are you sure you want to mark this task as incomplete?")
+                    alertDialogBuilder.setPositiveButton("YES") { _, _ ->
+                        selectedTask.id?.let { allTaskViewModel.undoneTask(it) }
+                    }
+                    alertDialogBuilder.setNegativeButton("NO") { _, _ ->}
+                    val alertDialog = alertDialogBuilder.create()
+                    alertDialog.show()
                 })
         }
 
