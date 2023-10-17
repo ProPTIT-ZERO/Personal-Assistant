@@ -88,8 +88,7 @@ class AlarmViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
     private fun cancelAlarm(context: Context,requestID: Int) {
-        val pendingIntent = PendingIntent.getBroadcast(
-            context, requestID, intent, PendingIntent.FLAG_IMMUTABLE)
-            alarmManager.cancel(pendingIntent)
+        val pendingIntent = PendingIntent.getBroadcast(context, requestID, intent, PendingIntent.FLAG_IMMUTABLE)
+        alarmManager.cancel(pendingIntent)
     }
 }

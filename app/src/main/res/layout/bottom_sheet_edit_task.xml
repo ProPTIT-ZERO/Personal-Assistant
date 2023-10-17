@@ -86,33 +86,39 @@
         android:id="@+id/choosePriority"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskTextInputLayout"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="16dp"
-        android:orientation="horizontal">
+        app:layout_constraintTop_toBottomOf="@+id/taskTextInputLayout">
+
         <RadioButton
             android:id="@+id/chooseCritical"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/red"
             android:text="@string/critical"
-            android:background="@color/red"/>
+            android:textSize="12dp" />
+
         <RadioButton
             android:id="@+id/chooseImportant"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/yellow"
             android:text="@string/important"
-            android:background="@color/yellow"/>
+            android:textSize="12dp" />
+
         <RadioButton
             android:id="@+id/chooseLowPriority"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/green"
             android:text="@string/low_priority"
-            android:background="@color/green" />
+            android:textSize="12dp" />
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
