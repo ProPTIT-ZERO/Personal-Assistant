@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import club.mobile.d21.personalassistant.R
 import club.mobile.d21.personalassistant.databinding.FragmentAddNoteBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.time.LocalDate
 import java.util.Calendar.*
 
@@ -49,6 +50,8 @@ class AddNoteFragment : Fragment() {
             val fragmentManager = parentFragmentManager
             fragmentManager.beginTransaction().remove(this).commit()
             fragmentManager.popBackStack()
+            val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+            bottomNavigationView?.visibility = View.VISIBLE
         }
     }
     companion object {

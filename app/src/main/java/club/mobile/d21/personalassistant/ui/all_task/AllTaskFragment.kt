@@ -11,6 +11,7 @@ import club.mobile.d21.personalassistant.R
 import club.mobile.d21.personalassistant.data.Priority
 import club.mobile.d21.personalassistant.databinding.FragmentAllTaskBinding
 import club.mobile.d21.personalassistant.ui.adapter.ClassifiedAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -74,6 +75,8 @@ class AllTaskFragment : Fragment() {
                     allTaskViewModel.addTask(task, priority, deadlineDay, deadLineTime, detail)
                 }
             })
+            val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+            bottomNavigationView?.visibility = View.GONE
             val fragmentManager = parentFragmentManager
             fragmentManager.beginTransaction().remove(this)
                 .setReorderingAllowed(true)

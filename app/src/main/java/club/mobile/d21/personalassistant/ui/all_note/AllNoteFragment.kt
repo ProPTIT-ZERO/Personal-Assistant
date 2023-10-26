@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import club.mobile.d21.personalassistant.R
 import club.mobile.d21.personalassistant.databinding.FragmentAllNoteBinding
 import club.mobile.d21.personalassistant.ui.adapter.NoteAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.time.LocalDate
 
 class AllNoteFragment : Fragment() {
@@ -57,6 +58,8 @@ class AllNoteFragment : Fragment() {
                     allNoteViewModel.addNote(date,note)
                 }
             })
+            val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+            bottomNavigationView?.visibility = View.GONE
             val fragmentManager = parentFragmentManager
             fragmentManager.beginTransaction()
                 .setReorderingAllowed(true)

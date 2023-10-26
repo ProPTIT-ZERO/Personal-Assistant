@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import club.mobile.d21.personalassistant.R
 import club.mobile.d21.personalassistant.data.Alarm
 import club.mobile.d21.personalassistant.databinding.FragmentAddAlarmBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.time.LocalTime
 
 class AddAlarmFragment : Fragment() {
@@ -45,6 +47,8 @@ class AddAlarmFragment : Fragment() {
             if(selectedTime == null){
                 return@setOnClickListener
             }
+            val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+            bottomNavigationView?.visibility = View.VISIBLE
             callBackAddAlarm.add(Alarm(null,binding.nameEditText.text.toString()
                 ,selectedTime.toString()))
             val fragmentManager = parentFragmentManager

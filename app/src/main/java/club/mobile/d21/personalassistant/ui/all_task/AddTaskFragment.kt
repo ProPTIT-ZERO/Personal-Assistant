@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import club.mobile.d21.personalassistant.R
 import club.mobile.d21.personalassistant.data.Priority
 import club.mobile.d21.personalassistant.databinding.FragmentAddTaskBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.Calendar.DAY_OF_MONTH
@@ -81,6 +82,8 @@ class AddTaskFragment: Fragment() {
                 priority == null|| !handleValidation()){
                 return@setOnClickListener
             }
+            val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+            bottomNavigationView?.visibility = View.VISIBLE
             callBackTask.add(binding.taskEditText.text.toString(), priority!!,
                 selectedDate!!, selectedTime!!, binding.detailEditText.text.toString())
             val fragmentManager = parentFragmentManager

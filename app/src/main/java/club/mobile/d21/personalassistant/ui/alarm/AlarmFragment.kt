@@ -13,6 +13,7 @@ import club.mobile.d21.personalassistant.R
 import club.mobile.d21.personalassistant.data.Alarm
 import club.mobile.d21.personalassistant.databinding.FragmentAlarmBinding
 import club.mobile.d21.personalassistant.ui.adapter.AlarmAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AlarmFragment : Fragment() {
     private var _binding: FragmentAlarmBinding? = null
@@ -60,6 +61,8 @@ class AlarmFragment : Fragment() {
                     alarmViewModel.addAlarm(alarm)
                 }
             })
+            val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+            bottomNavigationView?.visibility = View.GONE
             val fragmentManager = parentFragmentManager
             fragmentManager.beginTransaction()
                 .setReorderingAllowed(true)

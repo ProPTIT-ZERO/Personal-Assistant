@@ -18,14 +18,14 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_container)
-        val appBarConfiguration = AppBarConfiguration(
+        AppBarConfiguration(
             setOf(
                 R.id.navigation_today,R.id.navigation_task,
                 R.id.navigation_note,R.id.navigation_alarm)
             )
         navView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener{
-            controller, destination, arguments ->
+                _, destination, _ ->
             when(destination.id){
                 R.id.navigation_today ->{
                     binding.toolbar.title = getString(R.string.today)
